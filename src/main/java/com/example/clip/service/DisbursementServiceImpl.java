@@ -15,6 +15,7 @@ import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.RoundingMode;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -41,7 +42,7 @@ public class DisbursementServiceImpl implements DisbursementService {
         log.info("Processing all disbursements...");
         List<Payment> newStatusPaymentList = paymentRepository.findByStatusEquals(PaymentStatus.NEW.name());
         List<Disbursement> disbursementList = new ArrayList<>();
-        List<Long> userIdList = new ArrayList<>();
+        Set<Long> userIdList = new HashSet<>();
         for (Payment newStatusPayment : newStatusPaymentList) {
             long userId = newStatusPayment.getUser().getId();
             userIdList.add(userId);
@@ -63,6 +64,7 @@ public class DisbursementServiceImpl implements DisbursementService {
             newStatusPayment.setAmount(newPaymentAmount);
             newStatusPayment.setStatus(PaymentStatus.PROCESSED.name());
         }
+        log.info("Applying disbursement for {} Users on {} Payments", userIdList.size(), newStatusPaymentList.size());
         paymentRepository.saveAll(newStatusPaymentList);
         disbursementRepository.saveAll(disbursementList);
         Set<User> usersByIdIn = userRepository.findByIdIn(userIdList);
