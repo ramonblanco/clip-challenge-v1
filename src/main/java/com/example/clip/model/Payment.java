@@ -2,6 +2,7 @@ package com.example.clip.model;
 
 import com.example.clip.util.PaymentStatus;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -26,6 +27,7 @@ import java.math.BigDecimal;
 @Setter
 @AllArgsConstructor
 @Builder
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Payment {
 
     public Payment() {
@@ -44,6 +46,8 @@ public class Payment {
     @JoinColumn(name = "user_id")
     private User user;
 
+    @JsonIgnore
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @OneToOne(mappedBy = "payment", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private Disbursement disbursement;
 

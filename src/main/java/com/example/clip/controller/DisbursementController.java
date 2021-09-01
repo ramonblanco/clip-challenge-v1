@@ -1,5 +1,6 @@
 package com.example.clip.controller;
 
+import com.example.clip.model.User;
 import com.example.clip.response.UserDisbursementResponse;
 import com.example.clip.service.DisbursementService;
 import lombok.extern.slf4j.Slf4j;
@@ -10,6 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @Slf4j
 @RestController
@@ -24,9 +27,8 @@ public class DisbursementController {
     }
 
     @GetMapping
-    public ResponseEntity<Void> triggerBulkDisbursement() {
-        disbursementService.processAllDisbursements();
-        return ResponseEntity.status(HttpStatus.OK).build();
+    public ResponseEntity<List<User>> triggerBulkDisbursement() {
+        return new ResponseEntity<>(disbursementService.processAllDisbursements(), HttpStatus.OK);
     }
 
     @GetMapping("/userId")

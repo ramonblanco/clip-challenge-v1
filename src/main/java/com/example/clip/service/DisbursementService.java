@@ -1,6 +1,10 @@
 package com.example.clip.service;
 
+import com.example.clip.model.User;
+
+import java.util.List;
+
 public interface DisbursementService {
 
-    void processAllDisbursements();
+    List<User> processAllDisbursements();
 }
