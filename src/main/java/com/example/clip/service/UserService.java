@@ -2,11 +2,10 @@ package com.example.clip.service;
 
 import com.example.clip.model.User;
 import com.example.clip.request.UserRequest;
-
-import java.util.List;
+import org.springframework.data.domain.Page;
 
 public interface UserService {
     User createUser(UserRequest userRequest);
 
-    List<User> retrieveUsers(Boolean withPayments);
+    Page<User> retrieveUsers(Boolean withPayments, String pageNumber, String pageSize);
 }

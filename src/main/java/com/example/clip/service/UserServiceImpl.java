@@ -5,10 +5,10 @@ import com.example.clip.repository.UserRepository;
 import com.example.clip.request.UserRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Slf4j
 @Service
@@ -30,10 +30,11 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public List<User> retrieveUsers(Boolean withPayments) {
+    public Page<User> retrieveUsers(Boolean withPayments, String pageNumber, String pageSize) {
+        Pageable pageable = PageRequest.of(Integer.parseInt(pageNumber), Integer.parseInt(pageSize));
         if (withPayments == null || !withPayments) {
-            return userRepository.findAll();
+            return userRepository.findAll(pageable);
         }
-        return new ArrayList<>(userRepository.findByPaymentsIsNotNull());
+        return userRepository.findDistinctByPaymentsIsNotNull(pageable);
     }
 }

@@ -6,9 +6,11 @@ import com.example.clip.repository.PaymentRepository;
 import com.example.clip.repository.UserRepository;
 import com.example.clip.request.UserRequest;
 import com.example.clip.service.UserService;
+import com.example.clip.util.ListUtil;
 import com.example.clip.util.PaymentStatus;
 import com.github.javafaker.Faker;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -45,8 +47,10 @@ public class UserController {
     }
 
     @GetMapping
-    public ResponseEntity<List<User>> retrieveUsers(@RequestParam(required = false) Boolean withPayments) {
-        return new ResponseEntity<>(userService.retrieveUsers(withPayments), HttpStatus.OK);
+    public ResponseEntity<Page<User>> retrieveUsers(@RequestParam(required = false) Boolean withPayments,
+                                                    @RequestParam(required = false, defaultValue = "0") String pageNumber,
+                                                    @RequestParam(required = false, defaultValue = "10") String pageSize) {
+        return new ResponseEntity<>(userService.retrieveUsers(withPayments, pageNumber, pageSize), HttpStatus.OK);
     }
 
     @GetMapping("/populate")
@@ -59,7 +63,7 @@ public class UserController {
         for (int i = 0; i < limit; i++) {
             userList.add(User.builder().userName(faker.name().fullName()).build());
         }
-        List<User> persistedUserList = userRepository.saveAll(userList);
+        List<User> persistedUserList = ListUtil.getListFromIterable(userRepository.saveAll(userList));
 
         List<Payment> paymentList = new ArrayList<>();
         for (User persistedUser : persistedUserList) {
