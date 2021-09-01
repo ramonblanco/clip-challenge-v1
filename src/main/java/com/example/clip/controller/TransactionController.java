@@ -27,7 +27,7 @@ public class TransactionController {
     }
 
     @PostMapping
-    public ResponseEntity<Payment> create(@RequestBody PaymentRequest paymentRequest) {
+    public ResponseEntity<Payment> createUser(@RequestBody PaymentRequest paymentRequest) {
         return new ResponseEntity<>(transactionService.createPayment(paymentRequest), HttpStatus.CREATED);
     }
 

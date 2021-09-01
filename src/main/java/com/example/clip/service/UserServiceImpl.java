@@ -7,6 +7,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Slf4j
 @Service
 public class UserServiceImpl implements UserService{
@@ -24,5 +26,13 @@ public class UserServiceImpl implements UserService{
         User savedUser = userRepository.save(user);
         log.info("Successfully created user with username: {} and id: {}", savedUser.getUserName(), savedUser.getId());
         return savedUser;
+    }
+
+    @Override
+    public List<User> retrieveUsers(Boolean withPayments) {
+        if (withPayments == null || !withPayments) {
+            return userRepository.findAll();
+        }
+        return userRepository.findByPaymentsIsNotNull();
     }
 }
