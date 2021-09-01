@@ -67,8 +67,7 @@ public class DisbursementServiceImpl implements DisbursementService {
         log.info("Applying disbursement for {} Users on {} Payments", userIdList.size(), newStatusPaymentList.size());
         paymentRepository.saveAll(newStatusPaymentList);
         disbursementRepository.saveAll(disbursementList);
-        Set<User> usersByIdIn = userRepository.findByIdIn(userIdList);
-        return new ArrayList<>(usersByIdIn);
+        return userRepository.findByIdIn(userIdList);
     }
 
 }
