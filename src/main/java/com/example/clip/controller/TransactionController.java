@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Slf4j
 @RestController
-@RequestMapping("/api/clip")
+@RequestMapping("/api/clip/payments")
 public class TransactionController {
 
     private final TransactionService transactionService;
@@ -26,7 +26,7 @@ public class TransactionController {
         this.transactionService = transactionService;
     }
 
-    @PostMapping ("/createPayload")
+    @PostMapping
     public ResponseEntity<Payment> create(@RequestBody PaymentRequest paymentRequest) {
         return new ResponseEntity<>(transactionService.createPayment(paymentRequest), HttpStatus.CREATED);
     }

@@ -2,16 +2,28 @@ package com.example.clip.controller;
 
 import com.example.clip.model.User;
 import com.example.clip.request.UserRequest;
+import com.example.clip.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RequestMapping("/api/clip/users")
 public class UserController {
 
-    public ResponseEntity<User> createUser(@RequestBody UserRequest userRequest) {
+    private final UserService userService;
 
-        return new ResponseEntity<>(new User(), HttpStatus.CREATED);
+    @Autowired
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
+
+    @PostMapping
+    public ResponseEntity<User> createUser(@RequestBody UserRequest userRequest) {
+        return new ResponseEntity<>(userService.createUser(userRequest), HttpStatus.CREATED);
     }
 }
