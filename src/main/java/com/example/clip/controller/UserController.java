@@ -57,7 +57,7 @@ public class UserController {
         Random paymentRandom = new Random();
         List<User> userList = new ArrayList<>();
         for (int i = 0; i < limit; i++) {
-            userList.add(User.builder().userName(faker.name().firstName()).build());
+            userList.add(User.builder().userName(faker.name().fullName()).build());
         }
         List<User> persistedUserList = userRepository.saveAll(userList);
 

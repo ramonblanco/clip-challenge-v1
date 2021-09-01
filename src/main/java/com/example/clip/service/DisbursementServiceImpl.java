@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.math.MathContext;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -46,7 +47,9 @@ public class DisbursementServiceImpl implements DisbursementService {
             userIdList.add(userId);
             BigDecimal originalPaymentAmount = newStatusPayment.getAmount();
             BigDecimal disbursementAmount =
-                    FEE_PERCENTAGE.divide(WHOLE_PERCENTAGE, MathContext.UNLIMITED).multiply(originalPaymentAmount);
+                    FEE_PERCENTAGE.divide(WHOLE_PERCENTAGE, MathContext.UNLIMITED)
+                            .multiply(originalPaymentAmount)
+                            .setScale(2, RoundingMode.FLOOR);
             Disbursement disbursement = Disbursement.builder()
                     .user(User.builder()
                             .id(userId)
@@ -56,7 +59,7 @@ public class DisbursementServiceImpl implements DisbursementService {
                             .id(newStatusPayment.getId())
                             .build()).build();
             disbursementList.add(disbursement);
-            BigDecimal newPaymentAmount = originalPaymentAmount.subtract(disbursementAmount);
+            BigDecimal newPaymentAmount = originalPaymentAmount.subtract(disbursementAmount).setScale(2, RoundingMode.FLOOR);
             newStatusPayment.setAmount(newPaymentAmount);
             newStatusPayment.setStatus(PaymentStatus.PROCESSED.name());
         }
@@ -69,6 +72,8 @@ public class DisbursementServiceImpl implements DisbursementService {
     public static void main(String[] args) {
         BigDecimal originalPaymentAmount = new BigDecimal("15");
         BigDecimal disbursementAmount =
-                FEE_PERCENTAGE.divide(WHOLE_PERCENTAGE, MathContext.UNLIMITED).multiply(originalPaymentAmount);
+                FEE_PERCENTAGE.divide(WHOLE_PERCENTAGE, MathContext.UNLIMITED).multiply(originalPaymentAmount).setScale(2, RoundingMode.FLOOR);
+        BigDecimal newPaymentAmount = originalPaymentAmount.subtract(disbursementAmount).setScale(2,
+                RoundingMode.FLOOR);
     }
 }

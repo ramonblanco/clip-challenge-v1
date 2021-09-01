@@ -13,4 +13,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
     Set<User> findByIdIn(List<Long> userIdList);
 
     Set<User> findByDisbursementsIsNotNull();
+
+    User findByIdEquals(Long id);
 }
