@@ -71,11 +71,4 @@ public class DisbursementServiceImpl implements DisbursementService {
         return new ArrayList<>(usersByIdIn);
     }
 
-    public static void main(String[] args) {
-        BigDecimal originalPaymentAmount = new BigDecimal("15");
-        BigDecimal disbursementAmount =
-                FEE_PERCENTAGE.divide(WHOLE_PERCENTAGE, MathContext.UNLIMITED).multiply(originalPaymentAmount).setScale(2, RoundingMode.FLOOR);
-        BigDecimal newPaymentAmount = originalPaymentAmount.subtract(disbursementAmount).setScale(2,
-                RoundingMode.FLOOR);
-    }
 }
