@@ -1,0 +1,38 @@
+package com.example.clip.controller;
+
+import com.example.clip.response.UserDisbursementResponse;
+import com.example.clip.service.DisbursementService;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@Slf4j
+@RestController
+@RequestMapping("/api/clip/disbursements")
+public class DisbursementController {
+
+    private final DisbursementService disbursementService;
+
+    @Autowired
+    public DisbursementController(DisbursementService disbursementService) {
+        this.disbursementService = disbursementService;
+    }
+
+    @GetMapping
+    public ResponseEntity<Void> triggerBulkDisbursement() {
+        disbursementService.processAllDisbursements();
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
+
+    @GetMapping("/userId")
+    public ResponseEntity<UserDisbursementResponse> getDisbursementByUserId(@PathVariable String userId) {
+        //TODO
+        /*Make the same process as above but for a particular userId*/
+        return new ResponseEntity<>(new UserDisbursementResponse(), HttpStatus.OK);
+    }
+}

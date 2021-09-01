@@ -1,13 +1,12 @@
 package com.example.clip.model;
 
-import com.example.clip.util.PaymentStatus;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -21,16 +20,13 @@ import javax.persistence.Table;
 import java.math.BigDecimal;
 
 @Entity
-@Table(name = "payment")
+@Table(name = "disbursement")
 @Getter
 @Setter
-@AllArgsConstructor
 @Builder
-public class Payment {
-
-    public Payment() {
-        this.status = PaymentStatus.NEW.name();
-    }
+@AllArgsConstructor
+@NoArgsConstructor
+public class Disbursement {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -44,10 +40,8 @@ public class Payment {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @OneToOne(mappedBy = "payment", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    private Disbursement disbursement;
-
-    @Column(name = "status")
-    private String status;
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "payment_id")
+    private Payment payment;
 
 }
