@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
@@ -33,6 +34,6 @@ public class UserServiceImpl implements UserService{
         if (withPayments == null || !withPayments) {
             return userRepository.findAll();
         }
-        return userRepository.findByPaymentsIsNotNull();
+        return new ArrayList<>(userRepository.findByPaymentsIsNotNull());
     }
 }
