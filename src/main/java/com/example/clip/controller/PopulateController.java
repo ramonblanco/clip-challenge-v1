@@ -38,7 +38,7 @@ public class PopulateController {
     public ResponseEntity<Void> populateDb() {
         Faker faker = new Faker();
         Random userRandom = new Random();
-        int limit = userRandom.nextInt(49) + 1;
+        int limit = 5;
         Random paymentRandom = new Random();
         List<User> userList = new ArrayList<>();
         for (int i = 0; i < limit; i++) {

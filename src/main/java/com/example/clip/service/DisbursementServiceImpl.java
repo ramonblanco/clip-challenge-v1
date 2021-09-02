@@ -7,6 +7,7 @@ import com.example.clip.repository.DisbursementRepository;
 import com.example.clip.repository.PaymentRepository;
 import com.example.clip.repository.UserRepository;
 import com.example.clip.util.PaymentStatus;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,6 +26,8 @@ public class DisbursementServiceImpl implements DisbursementService {
 
     private static final BigDecimal FEE_PERCENTAGE = new BigDecimal("3.5");
     private static final BigDecimal WHOLE_PERCENTAGE = new BigDecimal("100");
+
+    private static final ObjectMapper MAPPER = new ObjectMapper();
 
     private final PaymentRepository paymentRepository;
     private final DisbursementRepository disbursementRepository;

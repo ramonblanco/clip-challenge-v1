@@ -1,0 +1,122 @@
+[
+  {
+    "id": 6,
+    "amount": 90.00,
+    "status": "NEW",
+    "user": {
+      "id": 1
+    }
+  },
+  {
+    "id": 7,
+    "amount": 12.00,
+    "status": "NEW",
+    "user": {
+      "id": 1
+    }
+  },
+  {
+    "id": 8,
+    "amount": 13.00,
+    "status": "NEW",
+    "user": {
+      "id": 1
+    }
+  },
+  {
+    "id": 9,
+    "amount": 96.00,
+    "status": "NEW",
+    "user": {
+      "id": 2
+    }
+  },
+  {
+    "id": 10,
+    "amount": 72.00,
+    "status": "NEW",
+    "user": {
+      "id": 2
+    }
+  },
+  {
+    "id": 11,
+    "amount": 53.00,
+    "status": "NEW",
+    "user": {
+      "id": 2
+    }
+  },
+  {
+    "id": 12,
+    "amount": 38.00,
+    "status": "NEW",
+    "user": {
+      "id": 3
+    }
+  },
+  {
+    "id": 13,
+    "amount": 80.00,
+    "status": "NEW",
+    "user": {
+      "id": 3
+    }
+  },
+  {
+    "id": 14,
+    "amount": 3.00,
+    "status": "NEW",
+    "user": {
+      "id": 3
+    }
+  },
+  {
+    "id": 15,
+    "amount": 62.00,
+    "status": "NEW",
+    "user": {
+      "id": 4
+    }
+  },
+  {
+    "id": 16,
+    "amount": 74.00,
+    "status": "NEW",
+    "user": {
+      "id": 4
+    }
+  },
+  {
+    "id": 17,
+    "amount": 22.00,
+    "status": "NEW",
+    "user": {
+      "id": 4
+    }
+  },
+  {
+    "id": 18,
+    "amount": 18.00,
+    "status": "NEW",
+    "user": {
+      "id": 5
+    }
+  },
+  {
+    "id": 19,
+    "amount": 96.00,
+    "status": "NEW",
+    "user": {
+      "id": 5
+    }
+  },
+  {
+    "id": 20,
+    "amount": 45.00,
+    "status": "NEW",
+    "user": {
+      "id": 5
+    }
+  }
+]
