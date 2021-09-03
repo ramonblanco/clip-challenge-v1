@@ -1,4 +1,4 @@
-package com.clip;
+package com.example.clip;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
