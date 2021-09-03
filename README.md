@@ -42,3 +42,18 @@ The challenge consists of completing as many of the following steps as possible:
 - We are considering as reviewers that your code challenge is code-prod-quality and it will review under this impression.
 - Please initialize the directory with the challenge as a git repo so you can commit new features and we check on your thought process.
 - Please upload the code-challenge to a git-repository and share the access with the reviewers thavt recruitment team indicates. 
+
+
+##Execution:
+
+You can compile the project with the following command:
+
+    $ mvn clean install
+
+After that you can execute the program from an IDE eg. Eclipse, Visual Studio Code, IntelliJ. etc. or with the following command:
+
+    $ mvn spring-boot:run
+
+Once the Application is running you can check the documentation of the APIS in the following URL
+
+    $ http://localhost:8080/swagger-ui.html#/
