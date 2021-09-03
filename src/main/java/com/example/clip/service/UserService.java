@@ -7,5 +7,5 @@ import org.springframework.data.domain.Page;
 public interface UserService {
     User createUser(UserRequest userRequest);
 
-    Page<User> retrieveUsers(Boolean withPayments, String pageNumber, String pageSize);
+    Page<User> retrieveUsers(Boolean withPayments, Integer pageNumber, Integer pageSize);
 }

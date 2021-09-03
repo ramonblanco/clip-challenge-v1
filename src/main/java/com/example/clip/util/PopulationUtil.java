@@ -18,13 +18,6 @@ public final class PopulationUtil {
     public static final String MINIMUM_PAYMENT_AMOUNT_MESSAGE = "The minimum payment amount must be at least 1 pesos";
     public static final String MAXIMUM_PAYMENT_AMOUNT_MESSAGE = "The maximum payment amount can be maximum 100 pesos";
 
-    public static int getIntegerValueFromParamOrFallback(Integer parameter, Integer fallbackValue) {
-        if (parameter == null) {
-            return fallbackValue;
-        }
-        return parameter;
-    }
-
     public static Integer amountPerPayment(Integer maximumPaymentAmount) {
         Random randomPaymentAmount = new Random();
         int paymentAmount = randomPaymentAmount.nextInt(maximumPaymentAmount);

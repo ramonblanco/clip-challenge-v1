@@ -1,6 +1,7 @@
 package com.example.clip.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -25,6 +26,7 @@ import java.util.List;
 @Setter
 @Builder
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class User {
 
     @Id

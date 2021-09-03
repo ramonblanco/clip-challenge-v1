@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.constraints.Min;
+
 @RestController
 @RequestMapping("/api/clip/users")
 public class UserController {
@@ -32,8 +34,11 @@ public class UserController {
 
     @GetMapping
     public ResponseEntity<Page<User>> retrieveUsers(@RequestParam(required = false) Boolean withPayments,
-                                                    @RequestParam(required = false, defaultValue = "0") String pageNumber,
-                                                    @RequestParam(required = false, defaultValue = "10") String pageSize) {
+                                                    @RequestParam(required = false)
+                                                    @Min(value = 0,message = "Minimum page value is 0")
+                                                            Integer pageNumber,
+                                                    @Min(value = 0,message = "Minimum page size is 1")
+                                                    @RequestParam(required = false) Integer pageSize) {
         return new ResponseEntity<>(userService.retrieveUsers(withPayments, pageNumber, pageSize), HttpStatus.OK);
     }
 }

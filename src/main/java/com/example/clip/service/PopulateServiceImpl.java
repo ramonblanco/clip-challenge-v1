@@ -5,7 +5,7 @@ import com.example.clip.model.User;
 import com.example.clip.repository.PaymentRepository;
 import com.example.clip.repository.UserRepository;
 import com.example.clip.response.PopulationResponse;
-import com.example.clip.util.ListUtil;
+import com.example.clip.util.MiscellaneousUtil;
 import com.example.clip.util.PaymentStatus;
 import com.example.clip.util.PopulationUtil;
 import com.github.javafaker.Faker;
@@ -40,20 +40,20 @@ public class PopulateServiceImpl implements PopulateService {
     @Override
     public List<User> createUsers(Integer numberOfUsersToCreate) {
         List<User> userList = new ArrayList<>();
-        for (int i = 0; i < (numberOfUsersToCreate == null ? DEFAULT_NUMBER_OF_USERS : PopulationUtil.getIntegerValueFromParamOrFallback(numberOfUsersToCreate, DEFAULT_NUMBER_OF_USERS)); i++) {
+        for (int i = 0; i < (numberOfUsersToCreate == null ? DEFAULT_NUMBER_OF_USERS : MiscellaneousUtil.getIntegerValueFromParamOrFallback(numberOfUsersToCreate, DEFAULT_NUMBER_OF_USERS)); i++) {
             userList.add(User.builder().userName(faker.name().fullName()).build());
         }
         log.info("Persisting {} new Users", userList.size());
-        return ListUtil.getListFromIterable(userRepository.saveAll(userList));
+        return MiscellaneousUtil.getListFromIterable(userRepository.saveAll(userList));
     }
 
     @Override
     public List<Payment> createPayments(Integer numberOfPaymentsPerUserToCreate,
                                         Integer maximumAllowedAmountPerPayment, Optional<List<User>> optionalUserList) {
 
-        int paymentsToCreate = PopulationUtil.getIntegerValueFromParamOrFallback(numberOfPaymentsPerUserToCreate,
+        int paymentsToCreate = MiscellaneousUtil.getIntegerValueFromParamOrFallback(numberOfPaymentsPerUserToCreate,
                 DEFAULT_NUMBER_OF_PAYMENTS_PER_USER);
-        int maximumPaymentAmount = PopulationUtil.getIntegerValueFromParamOrFallback(maximumAllowedAmountPerPayment,
+        int maximumPaymentAmount = MiscellaneousUtil.getIntegerValueFromParamOrFallback(maximumAllowedAmountPerPayment,
                 DEFAULT_MAXIMUM_PAYMENT_AMOUNT);
 
         log.info("{} payments per each user will be inserted", paymentsToCreate);
