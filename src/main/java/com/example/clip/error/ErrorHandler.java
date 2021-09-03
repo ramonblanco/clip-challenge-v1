@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import javax.persistence.PersistenceException;
+import javax.validation.ConstraintViolationException;
 import java.time.LocalDateTime;
 
 @Slf4j
@@ -34,4 +35,16 @@ public class ErrorHandler extends ResponseEntityExceptionHandler {
         response.setTimestamp(LocalDateTime.now());
         return new ResponseEntity<>(response, httpStatus);
     }
+
+    @ExceptionHandler(ConstraintViolationException.class)
+    public ResponseEntity<ExceptionResponse> handleConstraintValidationException(ConstraintViolationException ex) {
+        log.error("A validation error has occurred", ex);
+        ExceptionResponse response = new ExceptionResponse();
+        HttpStatus httpStatus = HttpStatus.BAD_REQUEST;
+        response.setErrorCode(httpStatus.getReasonPhrase());
+        response.setErrorMessage(ex.getLocalizedMessage());
+        response.setTimestamp(LocalDateTime.now());
+        return new ResponseEntity<>(response, httpStatus);
+    }
+
 }
