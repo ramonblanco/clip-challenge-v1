@@ -8,6 +8,8 @@ import java.util.stream.StreamSupport;
 
 public class MiscellaneousUtil {
 
+    public static final String UNEXPECTED_MSG_SERVICE = "Unexpected service error.";
+
     public static <T> List<T> getListFromIterable(Iterable<T> iterable) {
         return StreamSupport.stream(Spliterators.spliteratorUnknownSize(iterable.iterator(),
                 Spliterator.ORDERED), false)
